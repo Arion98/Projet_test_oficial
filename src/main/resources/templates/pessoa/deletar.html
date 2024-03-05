@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+    xmlns="http://www.w3.org/1999/xhtml"
+    th:replace="layout/layout :: layout">
+<head>
+    <title>Lista</title>
+</head>
+<body>
+    <div class="Container" th:fragment="content">
+        <style>
+            .alterar{
+            text-decoration: none;
+            margin: 2% 1%;
+              }
+        </style>
+
+        <h1>Lista de Pessoas <span th:text="${qtd}"></span></h1>
+        <a href="/pessoa/alterar?visualizacao=removidos">visualizar excluidos</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Cpf</th>
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pessoa : ${pessoas}">
+                    <td th:text="${pessoa.id}"></td>
+                    <td th:text="${pessoa.nome}"></td>
+                    <td th:text="${pessoa.cpf}"></td>
+                    <td th:text="${pessoa.email}"></td>
+                    <td><a class="alterar" th:href="@{/pessoa/alterar/{id}(id=${pessoa.id})}">alterar</a>
+                    <a class="alterar" th:href="@{/pessoa/deletar/{id}(id=${pessoa.id})}">deletar</a></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

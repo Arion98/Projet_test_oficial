@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+    xmlns="http://www.w3.org/1999/xhtml"
+    th:replace="layout/layout :: layout">
+<head>
+    <title>Lista</title>
+</head>
+<body>
+    <div class="Container" th:fragment="content">
+        <style>
+            body{
+                margin: 10vh;
+            }
+            .alterar{
+            text-decoration: none;
+            border: .5px solid gray;
+            border-radius: 5px;
+            background-color: rgb(39, 39, 252);
+            color: aliceblue;
+            padding: 2%;
+            margin: 2% 1%;
+            transition: 1s;
+              }
+            .alterar:hover{
+               
+                color: rgb(245, 241, 241);
+                border: 1px solid blue;
+                
+            }
+
+            .deletar{
+                text-decoration: none;
+            border: .5px solid gray;
+            border-radius: 5px;
+            background-color: rgb(255, 31, 31);
+            color: aliceblue;
+            padding: 2%;
+            margin: 2% 1%;
+            }
+        </style>
+
+        <h1>Lista de Pessoas <span th:text="${qtd}"></span></h1>
+        <!-- <a href="/pessoa/alterar?visualizacao=removidos">visualizar excluidos</a> -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Cpf</th>
+                    <!-- <th>Cargo</th> -->
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pessoa : ${pessoas}">
+                    <td th:text="${pessoa.id}"></td>
+                    <td th:text="${pessoa.nome}"></td>
+                    <td th:text="${pessoa.cpf}"></td>
+                    <!-- <td>
+                        <p th:each="c : pessoa.cargos">
+                            <b th:text="${c.nome}"></b>
+                        </p>
+                    </td> -->
+                    <td th:text="${pessoa.email}"></td>
+                    <td><a class="alterar" th:href="@{/pessoa/alterar/{id}(id=${pessoa.id})}">alterar</a>
+                    <a class="deletar" th:href="@{/pessoa/deletar/{id}(id=${pessoa.id})}">deletar</a></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
